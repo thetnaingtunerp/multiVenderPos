@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="row justify-content-center">
+    <div class="col-12">
+      <h2 class="mb-2 page-title">Category  <a href="#" class="btn btn-sm m-2 btn-success" data-toggle="modal" data-target="#verticalModal"><span class="fe fe-plus fe-16 text-white"></span></a></h2>
+      <!-- Button trigger modal -->
+      <!-- <button type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal"> Launch demo modal </button> -->
+      <!-- Modal -->
+      <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="verticalModalTitle">Create New Category</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{% url 'myapp:categoryview' %}" method="post">{% csrf_token %}
+            <div class="modal-body"> 
+              <input type="text" name="category" class="form-control" placeholder="Category Name" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn mb-2 btn-success">Save</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <!-- end model  -->
+      <div class="row my-4">
+        <!-- Small table -->
+        <div class="col-md-12">
+          <div class="card shadow">
+            <div class="card-body">
+              <!-- table -->
+              <table class="table datatables" id="categoryview-1">
+                <thead>
+                  <tr>
+                    
+                    <th>branch</th>
+                    <th>Name</th>
+                    <th>created_at</th>
+                    <th>updated_at</th>
+                    
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="categorylist">
+
+                  {% for cat in categories %}
+                  <tr class="catlisttr">
+                    
+                    <td>{{cat.branch}}</td>
+                    <td ><strong class="text-primary">{{cat.category}}</strong></td>
+                    <td>{{cat.created_at}}</td>
+                    <td>{{cat.updated_at}}</td>
+                    
+                    <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-muted sr-only">Action</span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <span class="cid" hidden>{{cat.id}}</span>
+                        <a class="dropdown-item" href="#">Edit</a>
+                        
+                        <a class="dropdown-item text-danger removebtn" href="#">Remove</a>
+                        
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> <!-- simple table -->
+      </div> <!-- end section -->
+    </div> <!-- .col-12 -->
+  </div> <!-- .row -->
+
+  
+
+{% endblock content %}

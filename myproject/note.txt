@@ -1,0 +1,5 @@
+username : branch1
+password : admin@123
+
+username : branch2
+password : admin@123
