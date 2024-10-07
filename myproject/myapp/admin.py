@@ -8,3 +8,7 @@ admin.site.register(branch,branchadmin)
 class categoryadmin(admin.ModelAdmin):
     list_display = ('id','usr','branch','category','created_at','updated_at')
 admin.site.register(category,categoryadmin)
+
+class productadmin(admin.ModelAdmin):
+    list_display = ('id','name','branch','category','created_at','updated_at')
+admin.site.register(product,productadmin)

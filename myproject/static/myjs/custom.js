@@ -16,7 +16,7 @@ console.log('custome js working ....')
     var cid = currenttr.find(".cid").html();
     // console.log(cid)
     $.ajax({
-      url: `/categorydelete/${cid}/`,
+      url: `/category/delete/${cid}/`,
       method: "GET",
       data:{cid:cid},
       success: function(data){

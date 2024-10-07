@@ -6,32 +6,10 @@
 
 <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="mb-2 page-title">Category  <a href="#" class="btn btn-sm m-2 btn-success" data-toggle="modal" data-target="#verticalModal"><span class="fe fe-plus fe-16 text-white"></span></a></h2>
+      <h5 class="mb-2 page-title">Product List by {{cat}}</h5>
       <!-- Button trigger modal -->
       <!-- <button type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal"> Launch demo modal </button> -->
-      <!-- Modal -->
-      <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="verticalModalTitle">Create New Category</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="{% url 'myapp:categoryview' %}" method="post">{% csrf_token %}
-            <div class="modal-body"> 
-              <input type="text" name="category" class="form-control" placeholder="Category Name" required>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn mb-2 btn-success">Save</button>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-      <!-- end model  -->
+      
       <div class="row my-4">
         <!-- Small table -->
         <div class="col-md-12">
@@ -44,6 +22,8 @@
                     
                     <th>branch</th>
                     <th>Name</th>
+                    <th>saleprice</th>
+                    <th>stockbalance</th>
                     <th>created_at</th>
                     <th>updated_at</th>
                     
@@ -52,20 +32,22 @@
                 </thead>
                 <tbody id="categorylist">
 
-                  {% for cat in categories %}
-                  <tr class="catlisttr">
+                  {% for p in products %}
+                  <tr class="prolisttr">
                     
-                    <td>{{cat.branch}}</td>
-                    <td ><strong class="text-primary">{{cat.category}}</strong></td>
-                    <td>{{cat.created_at}}</td>
-                    <td>{{cat.updated_at}}</td>
+                    <td>{{p.branch}}</td>
+                    <td ><strong class="text-primary">{{p.name}}</strong></td>
+                    <td>{{p.saleprice}}</td>
+                    <td>{{p.stockbalance}}</td>
+                    <td>{{p.created_at}}</td>
+                    <td>{{p.updated_at}}</td>
                     
                     <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="text-muted sr-only">Action</span>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <span class="cid" hidden>{{cat.id}}</span>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editcat-{{cat.id}}">Edit</a>
+                        <span class="cid" hidden>{{p.id}}</span>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editproduct-{{p.id}}">Edit</a>
                         <a class="dropdown-item text-danger removebtn" href="#">Remove</a>
 
                         <!-- <button type="button" class="btn mb-2 btn-primary" data-toggle="modal1" data-target="#defaultModal"> Launch demo modal </button> -->
@@ -76,18 +58,18 @@
                         
                       </div>
                     </td>
-                    <div class="modal fade" id="editcat-{{cat.id}}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editproduct-{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="defaultModalLabel">Modal -{{cat.id}} title</h5>
+                            <h5 class="modal-title" id="defaultModalLabel">Modal -{{p.id}} title</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           
                           <div class="modal-body"> 
-                            <input type="text" name="category" class="form-control" value="{{cat.category}}" required>
+                            <input type="text" name="category" class="form-control" value="{{p.name}}" required>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>

@@ -19,10 +19,31 @@ def authlogin(request):
     return render(request, 'auth-login.html')
 
 
+# ===================================== start Home ========================================
+
+class homeview(View):
+    def get(self, request):
+        br = branch.objects.filter(usr=request.user)
+        context = {'br':br}
+        return render(request, 'homeview.html', context)
+
+class dashboard(View):
+    def get(self, request, id):
+        br = branch.objects.filter(usr=request.user, id=id)
+        products = product.objects.filter(branch=id)
+        categories = category.objects.filter(branch=id)
+        context = {'br':br, 'products':products, 'categories':categories}
+        return render(request, 'dashboard.html', context)
+# ===================================== end Home ========================================
+
+
+
+# ===================================== start category ========================================
 
 class categoryview(View):
     def get(self,request):
-        br = branch.objects.get(usr=request.user)
+        currentid= 1
+        br = branch.objects.get(usr=request.user, id=currentid)
         categories = category.objects.filter(branch=br.id)
         context = {'categories':categories}
         return render(request, 'categoryview.html', context)
@@ -35,8 +56,23 @@ class categoryview(View):
         c.save()
         return redirect(request.META['HTTP_REFERER'])
     
+    def put(self,request):
+        print('PUT')
+        return redirect(request.META['HTTP_REFERER'])
+    
 class categorydelete(View):
     def get(self, request, id):
         task = get_object_or_404(category, id=id)
         task.delete()
         return JsonResponse({'status':'success'})
+
+
+class product_list_by_category(View):
+    def get(self, request, id):
+        cat = get_object_or_404(category, id=id)
+        products = product.objects.filter(category=cat)
+        context = {'products':products, 'cat':cat}
+        return render(request, 'product_list_by_category.html', context)
+
+
+# ===================================== end category ========================================
