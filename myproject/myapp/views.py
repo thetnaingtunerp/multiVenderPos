@@ -11,12 +11,77 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 
 from .models import *
+from .forms import *
 
 def test(request):
     return render(request, 'base.html')
 
 def authlogin(request):
     return render(request, 'auth-login.html')
+
+
+
+class UserRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            pass
+        else:
+            return redirect('myapp:UserLoginView')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class SuperUserRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated & request.user.is_superuser:
+            pass
+        else:
+            return redirect('myapp:UserLoginView')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class AdminUserLoginView(FormView):
+    template_name = 'adminlogin.html'
+    form_class = AdminLoginForm
+    success_url = reverse_lazy('myapp:homeview')
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data['password']
+        usr = authenticate(username=username, password=password)
+
+        if usr is not None:
+            login(self.request, usr)
+
+        else:
+            return render(self.request, self.template_name, {'form': self.form_class, 'error': 'Invalid user login!'})
+        return super().form_valid(form)
+
+
+
+
+class UserLoginView(FormView):
+    template_name = 'login.html'
+    form_class = ULoginForm
+    success_url = reverse_lazy('myapp:homeview')
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data['password']
+        usr = authenticate(username=username, password=password)
+
+        if usr is not None:
+            login(self.request, usr)
+
+        else:
+            return render(self.request, self.template_name, {'form': self.form_class, 'error': 'Invalid user login!'})
+        return super().form_valid(form)
+
+class UserLogoutView(View):
+    def get(self,request):
+        logout(request)
+        return redirect('myapp:UserLoginView')
+
+
 
 
 # ===================================== start Home ========================================
