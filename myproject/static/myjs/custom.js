@@ -11,6 +11,8 @@ console.log('custome js working ....')
     ]
   });
 
+
+
   $("#categorylist").on('click', '.removebtn', function() {
     var currenttr = $(this).closest(".catlisttr");
     var cid = currenttr.find(".cid").html();

@@ -9,7 +9,8 @@ urlpatterns = [
     path('login/', UserLoginView.as_view(), name = 'UserLoginView'),
     path('logout/', UserLogoutView.as_view(), name='UserLogoutView'),
     path('AdminUserLoginView/', AdminUserLoginView.as_view(), name='AdminUserLoginView'),
-
+    
+    
     path('homeview/', homeview.as_view(), name='homeview'),
     path('dashboard/<int:id>/', dashboard.as_view(), name='dashboard'),
 

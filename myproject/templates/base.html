@@ -48,19 +48,11 @@
               <i class="fe fe-x"><span class="sr-only"></span></i>
             </a>
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a href="#" id="dashboardDropdown" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="ml-lg-2">Dashboard</span><span class="sr-only">(current)</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
-                  <a class="nav-link pl-lg-2" href="./index.html"><span class="ml-1">Default</span></a>
-                  
-                </div>
-              </li>
+              
               <li class="nav-item"></li>
                 <a class="nav-link" href="{% url 'myapp:homeview' %}">
-                  <span class="ml-lg-2">Home</span>
-                  <span class="badge badge-pill badge-primary">New</span>
+                  <span class="ml-lg-2">Home </span>
+                  <span class="badge badge-pill badge-primary">{{request.session.branch_name}}</span>
                 </a>
               </li>
               <li class="nav-item dropdown">
@@ -68,7 +60,7 @@
                   <span class="ml-lg-2">Setup</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="ui-elementsDropdown">
-                  <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Category</span></a>
+                  <a class="nav-link pl-lg-2" href="{% url 'myapp:categoryview' %}"><span class="ml-1">Category</span></a>
                   <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Products</span></a>
                   
                 </div>

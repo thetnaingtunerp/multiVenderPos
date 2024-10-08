@@ -95,10 +95,26 @@ class homeview(View):
 class dashboard(View):
     def get(self, request, id):
         br = branch.objects.filter(usr=request.user, id=id)
-        products = product.objects.filter(branch=id)
-        categories = category.objects.filter(branch=id)
-        context = {'br':br, 'products':products, 'categories':categories}
-        return render(request, 'dashboard.html', context)
+        brname = branch.objects.get(id=id)
+        branch_id = self.request.session.get("branch_id")
+        if branch_id:
+            self.request.session['branch_id'] = id
+            self.request.session['branch_name'] = brname.branch_name
+            products = product.objects.filter(branch=branch_id)
+            categories = category.objects.filter(branch=branch_id)
+        # print(branch_id)
+            context = {'br':br, 'products':products, 'categories':categories}
+            return render(request, 'dashboard.html', context)
+            
+        else:
+            self.request.session['branch_id'] = id
+            self.request.session['branch_name'] = brname.branch_name
+            
+            products = product.objects.filter(branch=branch_id)
+            categories = category.objects.filter(branch=branch_id)
+        # print(branch_id)
+            context = {'br':br, 'products':products, 'categories':categories}
+            return render(request, 'dashboard.html', context)
 # ===================================== end Home ========================================
 
 
@@ -107,16 +123,19 @@ class dashboard(View):
 
 class categoryview(View):
     def get(self,request):
-        currentid= 1
-        br = branch.objects.get(usr=request.user, id=currentid)
+        branch_id = self.request.session.get("branch_id", None)
+        print(branch_id)
+        br = branch.objects.get(usr=request.user, id=branch_id)
         categories = category.objects.filter(branch=br.id)
         context = {'categories':categories}
         return render(request, 'categoryview.html', context)
 
     def post(self, request):
         cat = request.POST.get('category')
-        br = branch.objects.get(usr=request.user)
-        brid = int(br.id)
+        branch_id = self.request.session.get("branch_id", None)
+        br = branch.objects.get(usr=request.user, id = branch_id)
+        # brid = int(br.id)
+        
         c = category(branch=br, usr=request.user, category=cat)
         c.save()
         return redirect(request.META['HTTP_REFERER'])
