@@ -96,12 +96,12 @@ class dashboard(View):
     def get(self, request, id):
         br = branch.objects.filter(usr=request.user, id=id)
         brname = branch.objects.get(id=id)
-        branch_id = self.request.session.get("branch_id")
+        branch_id = self.request.session.get("branch_id", None)
         if branch_id:
             self.request.session['branch_id'] = id
             self.request.session['branch_name'] = brname.branch_name
             products = product.objects.filter(branch=branch_id)
-            categories = category.objects.filter(branch=branch_id)
+            categories = category.objects.filter(branch=id)
         # print(branch_id)
             context = {'br':br, 'products':products, 'categories':categories}
             return render(request, 'dashboard.html', context)
@@ -111,7 +111,7 @@ class dashboard(View):
             self.request.session['branch_name'] = brname.branch_name
             
             products = product.objects.filter(branch=branch_id)
-            categories = category.objects.filter(branch=branch_id)
+            categories = category.objects.filter(branch=id)
         # print(branch_id)
             context = {'br':br, 'products':products, 'categories':categories}
             return render(request, 'dashboard.html', context)
@@ -150,6 +150,12 @@ class categorydelete(View):
         task.delete()
         return JsonResponse({'status':'success'})
 
+class categoryedit(View):
+    def get(self, request, id):
+        catname = request.GET.get('cat')
+        ca = category.objects.filter(id=id)
+        ca.update(category=catname)
+        return JsonResponse({'status':'success'})
 
 class product_list_by_category(View):
     def get(self, request, id):
