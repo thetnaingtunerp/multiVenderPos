@@ -51,8 +51,13 @@
               
               <li class="nav-item"></li>
                 <a class="nav-link" href="{% url 'myapp:homeview' %}">
-                  <span class="ml-lg-2">Home </span>
-                  <span class="badge badge-pill badge-primary">{{request.session.branch_name}}</span>
+                  <span class="ml-lg-2"><strong class="text-primary">{{request.session.branch_name}}</strong></span>
+                  
+                </a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="{% url 'myapp:saleview' %}">
+                  <span class="ml-lg-2"><strong class="text-dark">Sale</strong></span>
                 </a>
               </li>
               <li class="nav-item dropdown">
@@ -61,7 +66,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="ui-elementsDropdown">
                   <a class="nav-link pl-lg-2" href="{% url 'myapp:categoryview' %}"><span class="ml-1">Category</span></a>
-                  <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Products</span></a>
+                  <a class="nav-link pl-lg-2" href="{% url 'myapp:productview' %}"><span class="ml-1">Products</span></a>
                   
                 </div>
               </li>

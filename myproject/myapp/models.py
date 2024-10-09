@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class branch(models.Model):
-    usr = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    usr = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     branch_name = models.CharField(max_length=225,blank=True, null=True)
     phone = models.CharField(max_length=225,blank=True, null=True)
     address = models.CharField(max_length=225,blank=True, null=True)

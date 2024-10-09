@@ -123,12 +123,15 @@ class dashboard(View):
 
 class categoryview(View):
     def get(self,request):
-        branch_id = self.request.session.get("branch_id", None)
-        print(branch_id)
-        br = branch.objects.get(usr=request.user, id=branch_id)
-        categories = category.objects.filter(branch=br.id)
-        context = {'categories':categories}
-        return render(request, 'categoryview.html', context)
+        try:
+            branch_id = self.request.session.get("branch_id", None)
+            br = branch.objects.get(usr=request.user, id=branch_id)
+            categories = category.objects.filter(branch=br.id)
+            context = {'categories':categories}
+            return render(request, 'categoryview.html', context)
+        except:
+            return redirect('myapp:homeview')
+        
 
     def post(self, request):
         cat = request.POST.get('category')
@@ -159,10 +162,69 @@ class categoryedit(View):
 
 class product_list_by_category(View):
     def get(self, request, id):
-        cat = get_object_or_404(category, id=id)
-        products = product.objects.filter(category=cat)
-        context = {'products':products, 'cat':cat}
-        return render(request, 'product_list_by_category.html', context)
+        try:
+            branch_id = self.request.session.get("branch_id", None)
+            catauth = category.objects.get(usr=request.user, branch=branch_id, id=id)
+            if branch_id is not None and catauth.id == id:
+                cat = get_object_or_404(category, id=id)
+                products = product.objects.filter(category=cat)
+                fm = itemcreateform()
+                context = {'products':products, 'cat':cat, 'fm':fm}
+                return render(request, 'product_list_by_category.html', context)
+        except:
+            return redirect('myapp:homeview')
+        
+    
+    def post(self, request, id):
+        try:
+            name = request.POST.get('name')
+            saleprice = request.POST.get('saleprice')
+            purchaseprice = request.POST.get('purchaseprice')
+            branch_id = self.request.session.get("branch_id", None)
+            catauth = category.objects.get(usr=request.user, branch=branch_id, id=id)
+            br = branch.objects.get(usr=request.user, id = branch_id)
+
+            if branch_id is not None and catauth.id == id:
+                p=product(branch=br, name=name, category=catauth, saleprice=saleprice, purchaseprice=purchaseprice)
+                p.save()
+                return redirect(request.META['HTTP_REFERER'])
+        except:
+            return redirect('myapp:homeview')
+        
+        
+        
+
+
+
 
 
 # ===================================== end category ========================================
+
+# ===================================== start product ========================================
+
+class productview(View):
+    def get(self, request):
+        branch_id = self.request.session.get("branch_id", None)
+        products = product.objects.filter(branch=branch_id)
+        fm = itemcreateform()
+        context = {'products':products, 'fm':fm}
+        return render(request, 'productview.html', context)
+    
+    def post(self, request):
+        pass
+
+
+
+
+
+# ===================================== end product ========================================
+
+class saleview(View):
+    def get(self, request):
+        branch_id = self.request.session.get("branch_id", None)
+        products = product.objects.filter(branch=branch_id)
+        context = {'products':products}
+        return render(request, 'saleview.html', context)
+
+
+# ===================================== end sale ========================================

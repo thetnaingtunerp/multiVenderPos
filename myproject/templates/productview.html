@@ -3,46 +3,17 @@
 {% block content %}
 
 
-
-
 <div class="row justify-content-center">
     <div class="col-12">
-      
-      <div class="row align-items-center mb-2">
-        <div class="col">
-          <h5 class="mb-2 page-title">Items List by {{cat}}</h5>
-        </div>
-        <div class="col-auto">
-          <a href="#" class="btn btn-sm btn-success h5"  data-toggle="modal" data-target="#newItm">create new item</a>
-        </div>
-      </div>
-      <!-- Button trigger modal -->
-      <div class="modal fade" id="newItm" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="defaultModalLabel">New Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <div class="row align-items-center mb-2">
+            <div class="col">
+              <h5 class="mb-2 page-title">Items List by {{cat}}</h5>
             </div>
-            <form action="" method="post">{% csrf_token %}
-            <div class="modal-body"> 
-              
-                {{fm}}
-                
-              
+            <div class="col-auto">
+              <a href="#" class="btn btn-sm btn-success h5">create new item</a>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn mb-2 btn-success">Create Item</button>
-            </div>
-          </form>
-            
           </div>
-        </div>
-      </div>
-      <!-- modal  -->
+      <!-- Button trigger modal -->
       <!-- <button type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal"> Launch demo modal </button> -->
       
       <div class="row my-4">
