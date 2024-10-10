@@ -86,7 +86,7 @@ class UserLogoutView(View):
 
 # ===================================== start Home ========================================
 
-class homeview(View):
+class homeview(UserRequiredMixin,View):
     def get(self, request):
         br = branch.objects.filter(usr=request.user)
         context = {'br':br}
@@ -194,24 +194,24 @@ class product_list_by_category(View):
         
         
 
-
-
-
-
 # ===================================== end category ========================================
 
 # ===================================== start product ========================================
 
 class productview(View):
     def get(self, request):
-        branch_id = self.request.session.get("branch_id", None)
-        products = product.objects.filter(branch=branch_id)
-        fm = itemcreateform()
-        context = {'products':products, 'fm':fm}
-        return render(request, 'productview.html', context)
-    
-    def post(self, request):
-        pass
+        try:
+            branch_id = self.request.session.get("branch_id", None)
+            if branch_id is not None:
+                products = product.objects.filter(branch=branch_id)
+                fm = itemcreateform()
+                context = {'products':products, 'fm':fm}
+                return render(request, 'productview.html', context)
+            else:
+                return redirect('myapp:homeview')
+        except:
+            return redirect('myapp:homeview')
+        
 
 
 
@@ -221,10 +221,14 @@ class productview(View):
 
 class saleview(View):
     def get(self, request):
-        branch_id = self.request.session.get("branch_id", None)
-        products = product.objects.filter(branch=branch_id)
-        context = {'products':products}
-        return render(request, 'saleview.html', context)
+        try:
+            branch_id = self.request.session.get("branch_id", None)
+            products = product.objects.filter(branch=branch_id)
+            context = {'products':products}
+            return render(request, 'saleview.html', context)
+        except:
+            return redirect('myapp:homeview')
+            
 
 
 # ===================================== end sale ========================================
