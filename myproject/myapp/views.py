@@ -104,7 +104,8 @@ class dashboard(View):
             categories = category.objects.filter(branch=id)
         # print(branch_id)
             context = {'br':br, 'products':products, 'categories':categories}
-            return render(request, 'dashboard.html', context)
+            # return render(request, 'dashboard.html', context)
+            return redirect('myapp:saleview')
             
         else:
             self.request.session['branch_id'] = id

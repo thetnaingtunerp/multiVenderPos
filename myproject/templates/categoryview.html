@@ -78,7 +78,7 @@
                     </td>
                     <div class="modal fade" id="editcat-{{cat.id}}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content editmodal">
                           <div class="modal-header">
                             <h5 class="modal-title" id="defaultModalLabel">Modal -{{cat.id}} title</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -87,6 +87,7 @@
                           </div>
                           
                           <div class="modal-body"> 
+                            <span class="cid" hidden>{{cat.id}}</span>
                             <input type="text" name="category" class="form-control" value="{{cat.category}}" required>
                           </div>
                           <div class="modal-footer">

@@ -61,7 +61,49 @@ console.log('custome js working ....')
   });
 
 
-
-
-
 //End Category View 
+
+//Start Item
+
+
+
+//End Item
+
+// Print Table 
+
+
+// function printDiv() {
+//   var divToPrint = document.getElementById('table');
+//   var htmlToPrint = '' +
+//       '<style type="text/css">' +
+//           'table td {' +
+//       'border:1px solid #dddddd;' +
+//       'padding:8px;' +
+//       '}' +
+
+//       'table  {' +
+//       'border-collapse: collapse;' +
+//       'width: 100%;' +
+//       '}' +
+
+//       '</style>';
+//   htmlToPrint += divToPrint.outerHTML;
+//   newWin = window.open("");
+//   newWin.document.write(htmlToPrint);
+//   newWin.print();
+//   newWin.close();
+// }
+
+
+
+
+function printTable() {
+	var el=document.getElementById("saleview-1");
+	el.setAttribute('border', '1');
+  el.setAttribute('cellpadding', '10');
+  
+	newPrint=window.open("");
+	newPrint.document.write(el.outerHTML);
+	newPrint.print();
+	newPrint.close();
+}

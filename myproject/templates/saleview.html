@@ -2,7 +2,21 @@
 
 {% block content %}
 
+<style>
+  @media screen
+{
+    .noPrint{}
+    .titles{display:none;}
+    .footer{display:none;}
+}
 
+@media print
+{
+    .noPrint{display:none;}
+    .title{}
+    .footer{}
+}
+</style>
 
 <div class="row justify-content-center">
     <div class="col-12">
@@ -13,37 +27,68 @@
       <div class="row my-4">
         <div class="col-md-5">
             <div class="card shadow">
-              <div class="card-body">
+              <div class="card-body" id="salecardbody">
                 <!-- table -->
-                <table class="table datatables" id="saleview-1">
+                <table class="table" style="width:100%" id="saleview-1">
                   <thead>
-                    <tr>
-                      
-                      <th>Item Name</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Amount</th>
-                      
-                    </tr>
+                    <th colspan="5"><div class="titles">Title Header <br> address : Yangon, Mandalay, Saging<br>phone 1234567789, 1234567899</div></th>
+                    
+                    
+                    
                   </thead>
                   <tbody id="categorylist">
+                    <tr>
+                      <td>no.</td>
+                      <td>Item Name</td>
+                      <td>Price</td>
+                      <td>Qty</td>
+                      <td>Amount</td>
+                      
+                    </tr>
+                    
   
                     {% for p in products %}
                     <tr class="prolisttr">
                       
-                      
+                      <td>{{forloop.counter}}</td>
                       <td ><strong class="text-primary">{{p.name}}</strong></td>
-                      <td>{{p.branch}}</td>
-                      <td>{{p.saleprice}}</td>
-                      <td>{{p.stockbalance}}</td>
+                      <td>1000000</td>
+                      <td>100</td>
+                      
+                      <td>1000000</td>
                       
                       
                       
                     </tr>
                     {% endfor %}
+                    <tr>
+                      
+                      <td></th>
+                      <td></th>
+                      <th></th>
+                      <th>Total</th>
+                      <th>100000</th>
+                      
+                    </tr>
                     
                   </tbody>
+                  <!-- <tfoot>
+                    <tr>
+                      <td>no.</td>
+                      <td>Item Name</td>
+                      <td>Price</td>
+                      <td>Qty</td>
+                      <td>Amount</td>
+                      
+                    </tr>
+                  </tfoot> -->
                 </table>
+                <hr>
+                <div class="row  justify-content-end">
+                  <div class="col-4"><a href="#" class="btn btn-block btn-success">Save</a></div>
+                  <div class="col-4"><a href="#" class="btn btn-block btn-primary" onclick="printTable();">Print</a></div>
+                
+                </div>
               </div>
             </div>
           </div> <!-- simple table -->

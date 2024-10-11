@@ -11,7 +11,7 @@ urlpatterns = [
     path('AdminUserLoginView/', AdminUserLoginView.as_view(), name='AdminUserLoginView'),
     
     
-    path('homeview/', homeview.as_view(), name='homeview'),
+    path('', homeview.as_view(), name='homeview'),
     path('dashboard/<int:id>/', dashboard.as_view(), name='dashboard'),
 
     path('categoryview/', categoryview.as_view(), name='categoryview'),
