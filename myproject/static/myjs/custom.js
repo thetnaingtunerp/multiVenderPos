@@ -63,11 +63,11 @@ console.log('custome js working ....')
 
 //End Category View 
 
-//Start Item
+//Start Add to Cart
 
 
 
-//End Item
+//End Add to Cart
 
 // Print Table 
 
@@ -107,3 +107,9 @@ function printTable() {
 	newPrint.print();
 	newPrint.close();
 }
+
+
+
+
+
+
