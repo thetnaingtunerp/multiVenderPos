@@ -88,7 +88,7 @@ class UserLogoutView(View):
 
 class homeview(UserRequiredMixin,View):
     def get(self, request):
-        br = branch.objects.filter(usr=request.user)
+        br = branchstaff.objects.filter(usr=request.user)
         context = {'br':br}
         return render(request, 'homeview.html', context)
 
