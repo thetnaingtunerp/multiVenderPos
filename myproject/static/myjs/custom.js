@@ -64,8 +64,28 @@ console.log('custome js working ....')
 //End Category View 
 
 //Start Add to Cart
+$("#productlist").on('click', '.addtocartbtn', function() {
+  var currenttr = $(this).closest(".prolisttr");
+  var cid = currenttr.find("input[name=pid]").val();
+  var pqty = currenttr.find("input[name=pqty]").val();
+  // console.log(cid)
+  $.ajax({
+    url: `/addtocart/`,
+    method: "GET",
+    data:{cid:cid, pqty:pqty},
+    success: function(data){
+      alert('Add to Card')
+        window.setTimeout(function(){ } ,2000);
+                        location.reload();
 
-
+        // window.location.href = '/admin/';
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    },
+                    
+  });//end ajax
+});
 
 //End Add to Cart
 

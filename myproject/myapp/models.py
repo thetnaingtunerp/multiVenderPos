@@ -36,3 +36,30 @@ class product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+class Cart(models.Model):
+    staff = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    total = models.PositiveIntegerField(default=0)
+    tax = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)
+
+class CartProduct(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(product, on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
+    subtotal = models.PositiveIntegerField(default=0)
+    remain_balance = models.IntegerField(default=0)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Cart : "+ str(self.cart.id)+ "CartProduct : " + str(self.id)

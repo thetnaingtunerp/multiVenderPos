@@ -229,7 +229,19 @@ class saleview(View):
             return render(request, 'saleview.html', context)
         except:
             return redirect('myapp:homeview')
-            
+
+
+class addtocart(View):
+    def get(self, request):
+        cid = request.GET.get('cid')
+        pqty = request.GET.get('pqty')
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            print(cart_id)
+        else:
+            print('no card id')
+        return JsonResponse({'status':'success'})
+
 
 
 # ===================================== end sale ========================================

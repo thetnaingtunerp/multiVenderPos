@@ -101,28 +101,34 @@
                 <thead>
                   <tr>
                     
-                    <th>branch</th>
+                    
                     <th>Name</th>
                     <th>saleprice</th>
                     <th>stockbalance</th>
+                    <th>branch</th>
                     
                     
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody id="categorylist">
+                <tbody id="productlist">
 
                   {% for p in products %}
                   <tr class="prolisttr">
                     
-                    <td>{{p.branch}}</td>
+                    
                     <td ><strong class="text-primary">{{p.name}}</strong></td>
                     <td>{{p.saleprice}}</td>
                     <td>{{p.stockbalance}}</td>
+                    <td style="max-width: 50px; min-width: 20px;">
+                      <input type="number" name="pqty" value="1" class="form-control">
+                    </td>
                    
                     
                     <td>
-                        <button class="btn btn-sm btn-block btn-success">addtocart</button>
+                      <input type="number" name="pid" value="{{p.id}}" hidden>
+                      
+                        <button class="btn btn-sm btn-block btn-success addtocartbtn">addtocart</button>
                     </td>
                     
                   </tr>
