@@ -47,11 +47,11 @@
                     </tr>
                     
   
-                    {% for p in products %}
+                    {% for p in cart.cartproduct_set.all %}
                     <tr class="prolisttr">
                       
                       <td>{{forloop.counter}}</td>
-                      <td ><strong class="text-primary">{{p.name}}</strong></td>
+                      <td ><strong class="text-primary">{{p.id}}</strong></td>
                       <td>1000000</td>
                       <td>100</td>
                       

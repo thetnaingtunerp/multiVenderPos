@@ -225,7 +225,12 @@ class saleview(View):
         try:
             branch_id = self.request.session.get("branch_id", None)
             products = product.objects.filter(branch=branch_id)
-            context = {'products':products}
+            cart_id = self.request.session.get('cart_id', None)
+            if cart_id:
+                cart = Cart.objects.get(id=cart_id)
+            else:
+                cart = None
+            context = {'products':products , 'cart':cart}
             return render(request, 'saleview.html', context)
         except:
             return redirect('myapp:homeview')
