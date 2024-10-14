@@ -90,7 +90,28 @@ $("#productlist").on('click', '.addtocartbtn', function() {
 //End Add to Cart
 
 // Print Table 
+$("#sbtn").on('click', '.invsavebtn', function() {
+  let i = $("input[name=customername]").val();
+  console.log(i);
+  // printTable();
+  $.ajax({
+    url: `/invoicesave/`,
+    method: "GET",
+    data:{i:i},
+    success: function(data){
+      printTable();
+      window.setTimeout(function(){ } ,2000);
+                        location.reload();
 
+        // window.location.href = '/admin/';
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    },
+                    
+  });//end ajax
+
+});
 
 // function printDiv() {
 //   var divToPrint = document.getElementById('table');

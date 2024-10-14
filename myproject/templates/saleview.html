@@ -28,6 +28,7 @@
         <div class="col-md-5">
             <div class="card shadow">
               <div class="card-body" id="salecardbody">
+                <input type="text" name="customername" id="customername" class="form-control" placeholder="Enter Customer Name">
                 <!-- table -->
                 <table class="table" style="width:100%" id="saleview-1">
                   <thead>
@@ -36,7 +37,7 @@
                     
                     
                   </thead>
-                  <tbody id="categorylist">
+                  <tbody id="carttbl">
                     <tr>
                       <td>no.</td>
                       <td>Item Name</td>
@@ -51,14 +52,14 @@
                     <tr class="prolisttr">
                       
                       <td>{{forloop.counter}}</td>
-                      <td ><strong class="text-primary">{{p.id}}</strong></td>
-                      <td>1000000</td>
-                      <td>100</td>
+                      <td ><strong class="text-primary">{{p.product.name}}</strong></td>
+                      <td>{{p.rate}}</td>
+                      <td>{{p.quantity}}</td>
                       
-                      <td>1000000</td>
+                      <td>{{p.subtotal}}</td>
                       
                       
-                      
+       
                     </tr>
                     {% endfor %}
                     <tr>
@@ -84,8 +85,9 @@
                   </tfoot> -->
                 </table>
                 <hr>
-                <div class="row  justify-content-end">
-                  <div class="col-4"><a href="#" class="btn btn-block btn-success">Save</a></div>
+                <div class="row  justify-content-end" id="btngp">
+                  <!-- <div class="col-4"><a href="#" class="btn btn-block btn-success invsave">Save</a></div> -->
+                   <div class="col-4" id="sbtn"><button type="button" class="btn btn-block btn-success invsavebtn">Save</button></div>
                   <div class="col-4"><a href="#" class="btn btn-block btn-primary" onclick="printTable();">Print</a></div>
                 
                 </div>

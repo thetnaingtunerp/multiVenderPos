@@ -19,8 +19,8 @@
             </div>
             <div class="col pr-0">
               <!-- <p class="small text-light mb-0">{{i.id}}</p> -->
-              <a href="{% url 'myapp:dashboard' i.id %}">
-              <span class="h3 mb-0 text-white">{{i.branch_name}}</span>
+              <a href="{% url 'myapp:dashboard' i.branch.id %}">
+              <span class="h3 mb-0 text-white">{{i.branch}}</span>
             </a>
               <span class="small text-muted"></span>
             </div>

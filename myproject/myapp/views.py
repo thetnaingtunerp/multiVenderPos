@@ -241,12 +241,58 @@ class addtocart(View):
         cid = request.GET.get('cid')
         pqty = request.GET.get('pqty')
         cart_id = self.request.session.get("cart_id", None)
+        branch_id = self.request.session.get("branch_id", None)
+        br = branch.objects.get(id = branch_id)
+        product_obj = get_object_or_404(product, id=int(cid))
+        cartrate = int(pqty) * product_obj.saleprice
         if cart_id:
-            print(cart_id)
+            # print(cart_id)
+            cart_obj = Cart.objects.get(id=cart_id)
+            this_product_in_cart = cart_obj.cartproduct_set.filter(product=product_obj)
+            if this_product_in_cart.exists():
+                cartproduct = this_product_in_cart.last()
+                cp_subtotal = cartproduct.subtotal
+                cart_obj.total -= cp_subtotal
+                
+                # cartrate = int(pqty) * product_obj.saleprice
+                cartproduct.subtotal = cartrate
+                cartproduct.quantity = int(pqty)
+
+                cart_obj.total += cartrate
+                cart_obj.save()
+                cartproduct.save()
+
+            else:
+                # cartrate = int(pqty) * product_obj.saleprice
+                cartproduct = CartProduct.objects.create(cart=cart_obj, product=product_obj,branch=br,
+                                                             rate=product_obj.saleprice, quantity=int(pqty),
+                                                             subtotal=cartrate
+                                                             )
+                cart_obj.total += cartrate
+                cart_obj.save()
         else:
-            print('no card id')
+            # print('no card id')
+            # br = branch.objects.get(id = branch_id)
+            cart_obj = Cart.objects.create(total=0, staff=request.user, branch=br)
+            self.request.session['cart_id'] = cart_obj.id
+            print(product_obj.saleprice)
+            cartproduct = CartProduct.objects.create(cart=cart_obj, product=product_obj,branch=br,
+                                                             rate=product_obj.saleprice, quantity=int(pqty),
+                                                             subtotal=cartrate
+                                                             )
+            cart_obj.total += cartrate
+            cart_obj.save()
         return JsonResponse({'status':'success'})
 
+
+class invoicesave(View):
+    def get(self, request):
+        cart_id = self.request.session.get("cart_id", None)
+        branch_id = self.request.session.get("branch_id", None)
+        customername = request.GET.get('i')
+        print(cart_id)
+        # del self.request.session['cart_id']
+        return JsonResponse({'status':'success'})
 
 
 # ===================================== end sale ========================================

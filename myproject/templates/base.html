@@ -48,13 +48,19 @@
               <i class="fe fe-x"><span class="sr-only"></span></i>
             </a>
             <ul class="navbar-nav mr-auto">
-              
+              {% if request.session.branch_name %}
               <li class="nav-item"></li>
                 <a class="nav-link" href="{% url 'myapp:homeview' %}">
-                  <span class="ml-lg-2"><strong class="text-primary">{{request.session.branch_name}}</strong></span>
-                  
-                </a>
+                  <span class="ml-lg-2"><strong class="text-primary">{{request.session.branch_name}}</strong></span>                  
+                </a>          
               </li>
+              {% else %}
+              <li class="nav-item"></li>
+                <a class="nav-link" href="{% url 'myapp:homeview' %}">
+                  <span class="ml-lg-2"><strong class="text-primary">Select Brnach Name</strong></span>                  
+                </a>          
+              </li>
+              {% endif %}
               <li class="nav-item"></li>
                 <a class="nav-link" href="{% url 'myapp:saleview' %}">
                   <span class="ml-lg-2"><strong>Sale</strong></span>
