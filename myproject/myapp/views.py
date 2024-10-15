@@ -226,11 +226,12 @@ class saleview(View):
             branch_id = self.request.session.get("branch_id", None)
             products = product.objects.filter(branch=branch_id)
             cart_id = self.request.session.get('cart_id', None)
+            inv = Order.objects.filter(branch=branch_id).order_by('-id')
             if cart_id:
                 cart = Cart.objects.get(id=cart_id)
             else:
                 cart = None
-            context = {'products':products , 'cart':cart}
+            context = {'products':products , 'cart':cart, 'inv':inv}
             return render(request, 'saleview.html', context)
         except:
             return redirect('myapp:homeview')
@@ -290,8 +291,12 @@ class invoicesave(View):
         cart_id = self.request.session.get("cart_id", None)
         branch_id = self.request.session.get("branch_id", None)
         customername = request.GET.get('i')
-        print(cart_id)
-        # del self.request.session['cart_id']
+
+        cart_obj = Cart.objects.get(id=cart_id)
+        br = branch.objects.get(id = branch_id)
+        
+        order = Order.objects.create(cart=cart_obj, branch=br, customername=customername)
+        del self.request.session['cart_id']
         return JsonResponse({'status':'success'})
 
 

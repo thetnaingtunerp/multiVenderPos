@@ -24,3 +24,7 @@ admin.site.register(Cart,Cartadmin)
 class CartProductadmin(admin.ModelAdmin):
     list_display = ('id', 'cart', 'branch', 'product', 'rate', 'quantity', 'subtotal')
 admin.site.register(CartProduct,CartProductadmin)
+
+class Orderadmin(admin.ModelAdmin):
+    list_display = ('id', 'cart', 'branch', 'customername')
+admin.site.register(Order,Orderadmin)
