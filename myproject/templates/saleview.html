@@ -28,7 +28,7 @@
         <div class="col-md-5">
             <div class="card shadow">
               <div class="card-body" id="salecardbody">
-                <input type="text" name="customername" id="customername" class="form-control" placeholder="Enter Customer Name">
+                <input type="text" name="customername" id="invcustomername" class="form-control" placeholder="Enter Customer Name" value="{{cart.customername}}">
                 <!-- table -->
                 <table class="table" style="width:100%" id="saleview-1">
                   <thead>
@@ -37,8 +37,8 @@
                    </tr>
 
                    <tr>
-                    <th colspan="3"><div class="titles">Customer: ------</div></th>
-                    <th colspan="2"><div class="titles">Date</div></th>
+                    <th colspan="3"><div class="titles cs">{{cart.customername}}</div></th>
+                    <th colspan="2"><div class="titles">{{cart.created_at}}</div></th>
                    </tr>
                     
                     
@@ -108,10 +108,6 @@
                 <table class="table" style="width:100%" id="saleview-2">
                   <thead>
                     
-                    
-                    
-                  </thead>
-                  <tbody id="invlist">
                     <tr>
                       <td>invno.</td>
                       <td>Customer Name</td>
@@ -121,11 +117,22 @@
                       
                     </tr>
                     
+                  </thead>
+                  <tbody id="invlist">
+                    <!-- <tr>
+                      <td>Sr.</td>
+                      <td>Customer Name</td>
+                      <td>Amount</td>
+                      <td>Date</td>
+                      <td>Action</td>
+                      
+                    </tr> -->
+                    
   
                     {% for p in inv %}
                     <tr class="prolisttr">
                       
-                      <td>{{forloop.counter}}</td>
+                      <td>{{p.id}}</td>
                       <td ><strong class="text-primary">{{p.customername}}</strong></td>
                       <td>{{p.cart.total}}</td>
                       <td>{{p.created_at}}</td>

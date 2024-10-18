@@ -11,6 +11,19 @@ console.log('custome js working ....')
     ]
   });
 
+  $('#saleview-2').DataTable(
+    {
+      autoWidth: true,
+      "lengthMenu": [
+        [16, 32, 64, -1],
+        [16, 32, 64, "All"]
+      ],
+      "ordering": false,
+    }
+    // { "targets": [0], "searchable": false, "orderable": false, "visible": true }
+  );
+ 
+
 
 
   $("#categorylist").on('click', '.removebtn', function() {
@@ -89,6 +102,29 @@ $("#productlist").on('click', '.addtocartbtn', function() {
 
 //End Add to Cart
 
+//Customer Change
+$("#invcustomername").change(function(){
+  var a1=$(this).val();
+  var drvcurrenttr = $(this).closest(".drvtbltr");
+  // var dvrtblid = drvcurrenttr.find(".dvrtblid").val();
+  $.ajax({
+  url: "/invcustomername/",
+  method: "GET",
+  data:{a1:a1},
+  success: function(data){
+    window.setTimeout(function(){ } ,2000);
+    location.reload();
+
+  },
+  error:function(){
+      alert('Error contact to 09-969255445');
+  },
+                  
+});//end ajax
+
+});//End Hour1
+
+
 // Print Table 
 $("#sbtn").on('click', '.invsavebtn', function() {
   let i = $("input[name=customername]").val();
@@ -102,7 +138,7 @@ $("#sbtn").on('click', '.invsavebtn', function() {
       printTable();
       window.setTimeout(function(){ } ,2000);
                         location.reload();
-
+                        // printTable();
         // window.location.href = '/admin/';
     },
     error:function(){

@@ -55,6 +55,7 @@ class product(models.Model):
 class Cart(models.Model):
     staff = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     branch = models.ForeignKey(branch, on_delete=models.CASCADE, blank=True, null=True)
+    customername = models.CharField(max_length=255,null=True, blank=True)
     total = models.PositiveIntegerField(default=0)
     tax = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

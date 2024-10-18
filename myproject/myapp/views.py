@@ -228,7 +228,7 @@ class saleview(View):
             cart_id = self.request.session.get('cart_id', None)
             inv = Order.objects.filter(branch=branch_id).order_by('-id')
             if cart_id:
-                cart = Cart.objects.get(id=cart_id)
+                cart = Cart.objects.get(id=cart_id)               
             else:
                 cart = None
             context = {'products':products , 'cart':cart, 'inv':inv}
@@ -298,6 +298,20 @@ class invoicesave(View):
         order = Order.objects.create(cart=cart_obj, branch=br, customername=customername)
         del self.request.session['cart_id']
         return JsonResponse({'status':'success'})
+
+class invcustomername(View):
+    def get(self, request):
+        a1 = request.GET.get('a1')
+        try:
+            cart_id = self.request.session.get("cart_id", None)
+            branch_id = self.request.session.get("branch_id", None)
+            cart_obj = Cart.objects.filter(id=cart_id).update(customername=a1)
+            # print('customer updated')
+
+            return JsonResponse({'status':'success'})
+        except:
+            # print('update error')
+            return JsonResponse({'status':'error'})
 
 
 # ===================================== end sale ========================================

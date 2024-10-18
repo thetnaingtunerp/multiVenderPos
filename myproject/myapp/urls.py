@@ -23,5 +23,6 @@ urlpatterns = [
     path('saleview/', saleview.as_view(), name='saleview'),
     path('addtocart/', addtocart.as_view(), name='addtocart'),
     path('invoicesave/', invoicesave.as_view(), name='invoicesave'),
+    path('invcustomername/', invcustomername.as_view(), name='invcustomername'),
     
 ]
