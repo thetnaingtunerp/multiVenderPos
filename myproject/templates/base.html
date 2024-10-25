@@ -14,7 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{% static 'css/feather.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'datatable/buttons.bootstrap4.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/select2.css' %}">
     <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
     <link rel="stylesheet" href="{% static 'css/uppy.min.css' %}">
@@ -26,6 +28,8 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{% static 'css/app-light.css' %}" id="lightTheme">
     <link rel="stylesheet" href="{% static 'css/app-dark.css' %}" id="darkTheme" disabled>
+
+
   </head>
   <body class="horizontal light  ">
     <div class="wrapper">
@@ -84,7 +88,7 @@
                 <div class="dropdown-menu" aria-labelledby="formsDropdown">
                   <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Status Status</span></a>
                   <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Item Report</span></a>
-                  <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Sale Report</span></a>
+                  <a class="nav-link pl-lg-2" href="{% url 'myapp:salereportview' %}"><span class="ml-1">Sale Report</span></a>
                   <a class="nav-link pl-lg-2" href="#"><span class="ml-1">Purchase Report</span></a>
                   
                 </div>
@@ -645,6 +649,18 @@
     <script src="{% static 'js/config.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- <script src="{% static 'datatable/buttons.bootstrap4.js' %}"></script>
+    <script src="{% static 'datatable/buttons.colVis.min.js' %}"></script>
+    <script src="{% static 'datatable/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'datatable/buttons.print.min.js' %}"></script>
+    <script src="{% static 'datatable/dataTables.buttons.js' %}"></script>
+    <script src="{% static 'datatable/dataTables.js' %}"></script>
+    <script src="{% static 'datatable/jszip.min.js' %}"></script>
+    <script src="{% static 'datatable/pdfmake.min.js' %}"></script>
+    <script src="{% static 'datatable/vfs_fonts.js' %}"></script> -->
+
+
     <script>
       /* defind global options */
       Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
@@ -662,6 +678,8 @@
     <script src="{% static 'js/dropzone.min.js' %}"></script>
     <script src="{% static 'js/uppy.min.js' %}"></script>
     <script src="{% static 'js/quill.min.js' %}"></script>
+
+
 
     <script src="{% static 'myjs/custom.js' %}"></script>
     <script>

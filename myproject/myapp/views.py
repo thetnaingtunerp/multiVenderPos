@@ -318,6 +318,15 @@ class invcustomername(View):
 
 # ===================================== start sale reports ========================================
 
+class salereportview(View):
+    def get(self, request):
+        try:
+            branch_id = self.request.session.get("branch_id", None)
+            rep = Cart.objects.filter(branch=branch_id)
+            context = {'rep':rep}
+            return render(request, 'salereportview.html', context)
+        except:
+            return HttpResponse('salerepoererror')
 
 
 

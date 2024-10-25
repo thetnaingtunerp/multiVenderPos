@@ -26,6 +26,24 @@ console.log('custome js working ....')
 
 
 
+//   new DataTable('#saleerporttbl', {
+//     layout: {
+//         topStart: {
+//             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+//         }
+//     }
+// });
+
+new DataTable('#saleerporttbl', {
+  layout: {
+      topStart: {
+          buttons: ['copy', 'excel', 'pdf', 'colvis']
+      }
+  }
+});
+
+
+
   $("#categorylist").on('click', '.removebtn', function() {
     var currenttr = $(this).closest(".catlisttr");
     var cid = currenttr.find(".cid").html();

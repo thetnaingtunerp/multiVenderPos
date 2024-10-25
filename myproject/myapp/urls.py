@@ -25,4 +25,6 @@ urlpatterns = [
     path('invoicesave/', invoicesave.as_view(), name='invoicesave'),
     path('invcustomername/', invcustomername.as_view(), name='invcustomername'),
     
+    path('salereportview/', salereportview.as_view(), name='salereportview'),
+    
 ]

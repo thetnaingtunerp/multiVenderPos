@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="row justify-content-center">
+    <div class="col-12">
+     
+      <!-- end model  -->
+      <div class="row my-4">
+        <!-- Small table -->
+        <div class="col-md-12">
+          <div class="card shadow">
+            <div class="card-body">
+              <!-- table -->
+              <table class="table datatables" id="saleerporttbl">
+                <thead>
+                  <tr>
+                    
+                    <th>branch</th>
+                    <th>customername</th>
+                    <th>total</th>
+                    <th>created_at</th>
+                    
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="categorylist">
+
+                  {% for i in rep %}
+                  <tr class="catlisttr">
+                    
+                    <td>{{i.branch}}</td>
+                    <td>{{i.customername}}</td>
+                    <td>{{i.total}}</td>
+                    <td>{{i.created_at}}</td>
+                    <td>{{i.branch}}</td>
+                    
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> <!-- simple table -->
+      </div> <!-- end section -->
+    </div> <!-- .col-12 -->
+  </div> <!-- .row -->
+
+
+
+  
+  
+
+{% endblock content %}
